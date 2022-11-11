@@ -16,7 +16,12 @@ export function RightSide() {
   return (
     <>
       <Title order={3}>Select a date and time</Title>
-      <RangeCalendar value={dates} onChange={setDates} mt="md" />
+      <RangeCalendar
+        value={dates}
+        onChange={setDates}
+        firstDayOfWeek="sunday"
+        mt="md"
+      />
       <TimeRangeInput
         label="Appointment time"
         value={value}
