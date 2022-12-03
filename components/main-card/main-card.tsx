@@ -14,7 +14,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { LeftSide } from "./left-side/left-side";
 import { RightSide } from "./right-side/right-side";
 
-export function MainCard() {
+export function MainCard({ handleSubmit }: any) {
   const isMobile = useMediaQuery("(min-width: 600px)");
 
   return isMobile ? (
@@ -24,7 +24,7 @@ export function MainCard() {
           <LeftSide />
         </Stack>
         <Stack>
-          <RightSide />
+          <RightSide handleSubmit={handleSubmit} />
         </Stack>
       </SimpleGrid>
     </Paper>
@@ -35,7 +35,7 @@ export function MainCard() {
           <LeftSide />
         </Stack>
         <Stack>
-          <RightSide />
+          <RightSide handleSubmit={handleSubmit} />
         </Stack>
       </Stack>
     </Paper>
