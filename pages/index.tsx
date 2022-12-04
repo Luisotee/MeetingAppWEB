@@ -94,8 +94,7 @@ export default function Home({ meetings }: any) {
           emailDone.email = email;
           sendMail(emailDone);
         });
-        //sendMail(emailDone);
-        //insertData(definetiveTime, { meeting });
+        insertData(definetiveTime, { meeting });
       }
     });
   }
