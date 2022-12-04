@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  //send();
+  send();
 
   //console.log(req.body);
 

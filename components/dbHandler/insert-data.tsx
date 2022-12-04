@@ -1,13 +1,14 @@
 import { supabase } from "../../supabase";
 
 export async function insertTime(props: any, { meeting }: any) {
-  //console.log(meeting);
+  //console.log(meeting.choosenTimes);
   let ar = meeting.choosenTimes;
   ar.push(props);
+  console.log(ar);
   const { error } = await supabase
     .from("meetings")
     .update({
-      choosenTimes: [ar],
+      choosenTimes: ar,
     })
     .eq("id", meeting.id)
     .select();

@@ -33,30 +33,33 @@ export default function Home({ meetings }: any) {
 
   function handleSubmit() {
     meetings.map((meeting: any) => {
-      //console.log(meeting);
+      // console.log(meeting);
 
-      if (meeting.limitData == dateNow && meeting.bestTime != null) {
+      if (meeting.limitData == dateNow && meeting.bestTime == null) {
         // console.log(meeting);
         if (meeting.emailAlreadySent == false) {
-          console.log("AAAAA");
+          //console.log(meeting);
           let emails = []; //Send emails
           emails = meeting.meetingParticipants.split(";");
-          console.log(meeting);
-          for (let i = 0; i < emails.length; i++) {
-            emailContent.email = emails[i];
+          //console.log(emails);
+
+          emails.map((email: any) => {
+            console.log(email);
+            emailContent.email = email;
             emailContent.message =
               "http://localhost:3000/meeting/" + meeting.id;
             sendMail(emailContent);
-          }
+            insertEmailSent({ meeting });
+          });
 
-          insertEmailSent({ meeting });
+          //insertEmailSent({ meeting });
         }
         let count1 = 0;
         let count2 = 0;
         let count3 = 0;
         let definetiveTime = "";
 
-        for (let i = 0; i < meeting.choosenTimes[0].length; i++) {
+        /*for (let i = 0; i < meeting.choosenTimes[0].length; i++) {
           if (meeting.choosenTimes[0][i] == meeting.time1) {
             count1++;
             // console.log("count 1: ", count1);
@@ -68,6 +71,22 @@ export default function Home({ meetings }: any) {
             // console.log("count 3: ", count3);
           }
         }
+        */
+        console.log(meeting.choosenTimes);
+        /* meeting.choosenTimes.map((time: any) => {
+          if (time == meeting.time1) {
+            count1++;
+            console.log("count 1: ", count1);
+          } else if (time == meeting.time2) {
+            count2++;
+            console.log("count 2: ", count2);
+          } else {
+            count3++;
+            console.log("count 3: ", count3);
+          }
+        });
+
+        /*
         if (count1 > count2 || count3) {
           definetiveTime = meeting.time1;
         } else if (count2 > count1 || count3) {
@@ -78,7 +97,7 @@ export default function Home({ meetings }: any) {
         }
         emailDone.message = definetiveTime;
         sendMail(emailDone);
-        insertData(definetiveTime, { meeting });
+        insertData(definetiveTime, { meeting });*/
       }
     });
   }
