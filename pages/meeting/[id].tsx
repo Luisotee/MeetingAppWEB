@@ -20,9 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   try {
     const { data: meeting } = await supabase
       .from("meetings")
-      .select(
-        "meetingName, meetingDuration, meetingDescription, dataISO, time1, time2, id"
-      )
+      .select("*")
       .eq("id", query.id);
 
     //console.log("meeting: ", meeting);

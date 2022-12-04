@@ -6,6 +6,12 @@ import { Container, Title } from "@mantine/core";
 import { supabase } from "../supabase";
 import styles from "../styles/Home.module.css";
 import { MainCard } from "../components/main-card/main-card";
+import { resolve } from "node:path/win32";
+import { count } from "node:console";
+import {
+  insertData,
+  insertEmailSent,
+} from "../components/dbHandler/insert-data";
 
 export default function Home({ meetings }: any) {
   const date = new Date();
@@ -13,30 +19,76 @@ export default function Home({ meetings }: any) {
 
   const emailContent = {
     email: [],
-    subject: "Oii",
-    message: "tchau",
-    name: "eumesmo",
+    subject: "Register Time",
+    message: "Schedule your meeting",
+    name: "SchedulerApp",
+  };
+
+  const emailDone = {
+    email: [],
+    subject: "Your meeting has been scheduled",
+    message: "",
+    name: "SchedulerApp",
   };
 
   function handleSubmit() {
     meetings.map((meeting: any) => {
-      if (meeting.limitData == dateNow) {
-        let emails = [];
-        emails = meeting.meetingParticipants.split(";");
-        for (let i = 0; i < emails.length; i++) {
-          emailContent.email = emails[i];
-          sendMail(emailContent);
+      //console.log(meeting);
+
+      if (meeting.limitData == dateNow && meeting.bestTime != null) {
+        // console.log(meeting);
+        if (meeting.emailAlreadySent == false) {
+          console.log("AAAAA");
+          let emails = []; //Send emails
+          emails = meeting.meetingParticipants.split(";");
+          console.log(meeting);
+          for (let i = 0; i < emails.length; i++) {
+            emailContent.email = emails[i];
+            emailContent.message =
+              "http://localhost:3000/meeting/" + meeting.id;
+            sendMail(emailContent);
+          }
+
+          insertEmailSent({ meeting });
         }
+        let count1 = 0;
+        let count2 = 0;
+        let count3 = 0;
+        let definetiveTime = "";
+
+        for (let i = 0; i < meeting.choosenTimes[0].length; i++) {
+          if (meeting.choosenTimes[0][i] == meeting.time1) {
+            count1++;
+            // console.log("count 1: ", count1);
+          } else if (meeting.choosenTimes[0][i] == meeting.time2) {
+            count2++;
+            // console.log("count 2: ", count2);
+          } else {
+            count3++;
+            // console.log("count 3: ", count3);
+          }
+        }
+        if (count1 > count2 || count3) {
+          definetiveTime = meeting.time1;
+        } else if (count2 > count1 || count3) {
+          definetiveTime = meeting.time2;
+        } else {
+          definetiveTime =
+            "Suggested time count higher, please redo your meeting.";
+        }
+        emailDone.message = definetiveTime;
+        sendMail(emailDone);
+        insertData(definetiveTime, { meeting });
       }
     });
   }
+  handleSubmit();
 
   return <div>Server</div>;
 }
 
 export const getStaticProps = async () => {
   const { data: meetings } = await supabase.from("meetings").select("*");
-
   return {
     props: {
       meetings,
