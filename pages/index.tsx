@@ -1,10 +1,11 @@
-import { Container, Title } from "@mantine/core";
+import moment from "moment";
 import Head from "next/head";
 import Image from "next/image";
-import { MainCard } from "../components/main-card/main-card";
-import styles from "../styles/Home.module.css";
-import moment from "moment";
+import { Container, Title } from "@mantine/core";
+
 import { supabase } from "../supabase";
+import styles from "../styles/Home.module.css";
+import { MainCard } from "../components/main-card/main-card";
 
 export default function Home({ meetings }: any) {
   const date = new Date();
@@ -30,11 +31,7 @@ export default function Home({ meetings }: any) {
     });
   }
 
-  return (
-    <Container>
-      <MainCard handleSubmit={handleSubmit} />
-    </Container>
-  );
+  return <div>Server</div>;
 }
 
 export const getStaticProps = async () => {
