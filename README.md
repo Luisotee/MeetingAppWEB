@@ -4,6 +4,7 @@ Scheduler
 
 Funcionalidades: Marcar melhor horário para as meetings, sugerir outras meetings, WiP
 
+**Por enquanto é necessário rodar o MeetingAppWEB como dev (yarn dev) para fazer o backend funcionar, sendo necessário manualmente recarregar a página (F5) para que coisas como envio de email, calculo das datas, etc. funcione** 
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
