@@ -20,6 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   //console.log(req.body);
 
   async function send() {
+    console.log("send");
     const result = await transporter.sendMail({
       from: "meetingappupxaf@gmail.com",
       to: req.body.email,

@@ -53,10 +53,10 @@ export default function Home({ meetings }: any) {
         meeting.bestTime == null &&
         meeting.choosenTimes != null
       ) {
-        console.log("ENTROEUUUUUUUUU");
+        //console.log("ENTROEUUUUUUUUU");
         let emails = [];
         emails = meeting.meetingParticipants.split(";");
-        console.log(emails);
+        //console.log(emails);
 
         let count1 = 0;
         let count2 = 0;
