@@ -1,9 +1,13 @@
 import { supabase } from "../../supabase";
 
-export async function insertTime(props: any, { meeting }: any) {
-  //console.log(meeting.choosenTimes);
-  let ar = meeting.choosenTimes;
-  ar.push(props);
+export async function insertTime(props, { meeting }) {
+  let ar = [];
+  if (meeting.choosenTimes == null) {
+    ar = [props];
+  } else {
+    ar = meeting.choosenTimes;
+    ar.push(props);
+  }
   console.log(ar);
   const { error } = await supabase
     .from("meetings")
@@ -16,7 +20,7 @@ export async function insertTime(props: any, { meeting }: any) {
   console.log(error);
 }
 
-export async function insertData(props: any, { meeting }: any) {
+export async function insertData(props, { meeting }) {
   //console.log(meeting);
   const { error } = await supabase
     .from("meetings")
@@ -29,7 +33,7 @@ export async function insertData(props: any, { meeting }: any) {
   console.log(error);
 }
 
-export async function insertEmailSent({ meeting }: any) {
+export async function insertEmailSent({ meeting }) {
   //console.log(meeting);
   const { error } = await supabase
     .from("meetings")

@@ -8,7 +8,7 @@ import {
 import dayjs from "dayjs";
 import moment from "moment";
 import { useState } from "react";
-import { insertTime } from "../../dbHandler/insert-data";
+import { insertTime } from "../../dbHandler/insert-data.jsx";
 
 export function RightSide({ meeting }: any) {
   const [inputSelected, setInputSelected] = useState(new Date());
