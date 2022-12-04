@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       text: req.body.message,
     });
 
-    //console.log(JSON.stringify(result, null, 4));
+    console.log(JSON.stringify(result, null, 4));
   }
 
   res.send(200);
