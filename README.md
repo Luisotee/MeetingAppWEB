@@ -1,6 +1,8 @@
-NOME: Luís Otávio RA: 190645
+NOME: Luís Otávio RA: 190645 Desenvolvimento Mobile e UPx
 
 Scheduler
+
+Funcionalidades: Marcar melhor horário para as meetings, sugerir outras meetings, WiP
 
 
 
