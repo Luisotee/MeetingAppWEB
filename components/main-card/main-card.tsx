@@ -21,7 +21,7 @@ export function MainCard({ meeting }: any) {
     <Paper shadow="sm" p="lg" radius="md" withBorder mt="xl">
       <SimpleGrid cols={2} p="lg">
         <Stack>
-          <LeftSide />
+          <LeftSide meeting={meeting} />
         </Stack>
         <Stack>
           <RightSide meeting={meeting} />
@@ -32,7 +32,7 @@ export function MainCard({ meeting }: any) {
     <Paper shadow="sm" p="lg" radius="md" withBorder mt="xl">
       <Stack>
         <Stack>
-          <LeftSide />
+          <LeftSide meeting={meeting} />
         </Stack>
         <Stack>
           <RightSide meeting={meeting} />

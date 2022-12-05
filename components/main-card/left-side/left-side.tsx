@@ -1,18 +1,22 @@
 import { Group, Text, ThemeIcon, Title } from "@mantine/core";
+import moment from "moment";
 import { FaClock } from "react-icons/fa";
 
-export function LeftSide() {
+export function LeftSide({ meeting }: any) {
+  console.log(meeting);
   return (
     <>
+      <Title order={2}>{meeting.meetingName}</Title>
       <Title order={5} color="dimmed" italic>
-        John Doe
+        {" "}
+        {meeting.meetingDescription}{" "}
       </Title>
-      <Title order={2}>1 Hour Meeting</Title>
+
       <Group>
         <ThemeIcon size="md" variant="default" radius="lg">
           <FaClock size={100} />
         </ThemeIcon>
-        <Text color="gray">1 hr</Text>
+        <Text color="gray">{meeting.meetingDuration}</Text>
       </Group>
     </>
   );

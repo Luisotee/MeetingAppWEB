@@ -41,7 +41,7 @@ export function RightSide({ meeting }: any) {
           defaultValue={new Date()}
           onChange={setInputSelected}
         />
-        <Button onClick={handleInput}>Send suggestion</Button>
+        <Button onClick={handleInput}>Set suggestion</Button>
       </SimpleGrid>
       <Text>Selected time: {selected}</Text>
       <Button onClick={() => insertTime(selected, { meeting })}>Submit</Button>
