@@ -34,7 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   async function send() {
-    console.log("dentro do send: ", req.body);
+    //console.log("dentro do send: ", req.body);
 
     if (req.body != null) {
       const result = await transporter.sendMail({

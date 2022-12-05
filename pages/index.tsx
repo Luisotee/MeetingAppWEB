@@ -49,7 +49,7 @@ export default function Home({ meetings }: any) {
       }
 
       if (
-        meeting.limitData < dateNow &&
+        meeting.limitData == dateNow &&
         meeting.bestTime == null &&
         meeting.choosenTimes != null
       ) {
@@ -76,10 +76,10 @@ export default function Home({ meetings }: any) {
         console.log("count 2: ", count2);
         console.log("count 3: ", count3);
 
-        if (count1 > count2 && count3) {
+        if (count1 > count2 && count1 > count3) {
           console.log("1");
           definetiveTime = meeting.time1;
-        } else if (count2 > count1 && count3) {
+        } else if (count2 > count1 && count2 > count3) {
           console.log("2");
           definetiveTime = meeting.time2;
         } else {
@@ -98,6 +98,7 @@ export default function Home({ meetings }: any) {
       }
     });
   }
+
   handleSubmit();
 
   return <div>Server</div>;
