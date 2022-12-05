@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   send();
 
-  //console.log(req.body);
+  console.log(req.body);
 
   await new Promise((resolve, reject) => {
     transporter.verify(function (error: any, sucess: any) {
