@@ -3,7 +3,6 @@ import moment from "moment";
 import { FaClock } from "react-icons/fa";
 
 export function LeftSide({ meeting }: any) {
-  console.log(meeting);
   return (
     <>
       <Title order={2}>{meeting.meetingName}</Title>

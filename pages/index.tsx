@@ -12,6 +12,7 @@ import {
   insertData,
   insertEmailSent,
 } from "../components/dbHandler/insert-data.jsx";
+import { removeMeeting } from "../components/dbHandler/delete-data";
 
 export default function Home({ meetings }: any) {
   const date = new Date();
@@ -33,7 +34,8 @@ export default function Home({ meetings }: any) {
 
   function handleSubmit() {
     meetings.map((meeting: any) => {
-      // console.log(meeting);
+      //console.log(meeting);
+      console.log("DATA hoj", dateNow);
 
       if (meeting.emailAlreadySent == false) {
         let emails = [];
@@ -49,7 +51,7 @@ export default function Home({ meetings }: any) {
       }
 
       if (
-        meeting.limitData == dateNow &&
+        meeting.limitData < dateNow &&
         meeting.bestTime == null &&
         meeting.choosenTimes != null
       ) {
@@ -95,6 +97,9 @@ export default function Home({ meetings }: any) {
           sendMail(emailDone);
         });
         insertData(definetiveTime, { meeting });
+      }
+      if (meeting.dataISO < dateNow) {
+        removeMeeting({ meeting });
       }
     });
   }
