@@ -13,8 +13,10 @@ import {
   insertEmailSent,
 } from "../components/dbHandler/insert-data.jsx";
 import { removeMeeting } from "../components/dbHandler/delete-data";
+import { useRouter } from "next/router";
+import { fetchMeetings } from "../components/dbHandler/fetch-data";
 
-export default function Home({ meetings }: any) {
+export default function Home() {
   const date = new Date();
   const dateNow = moment(date).format("YYYY-MM-DD");
 
@@ -32,7 +34,9 @@ export default function Home({ meetings }: any) {
     name: "SchedulerApp",
   };
 
-  function handleSubmit() {
+  async function handleSubmit() {
+    const meetings = await fetchMeetings();
+    //console.log(meetings);
     meetings.map((meeting: any) => {
       //console.log(meeting);
       console.log("DATA hoj", dateNow);
@@ -104,19 +108,29 @@ export default function Home({ meetings }: any) {
     });
   }
 
-  handleSubmit();
+  const router = useRouter();
+
+  /*const timer = setTimeout(() => {
+    console.log("aoi");
+    handleSubmit();
+    clearInterval(timer);
+  }, 1000);*/
+
+  const interval = setInterval(handleSubmit, 10000);
+
+  //handleSubmit();
 
   return <div>Server</div>;
 }
 
-export const getStaticProps = async () => {
+/*export const getServerSideProps = async () => {
   const { data: meetings } = await supabase.from("meetings").select("*");
   return {
     props: {
       meetings,
     },
   };
-};
+};*/
 
 const sendMail = async (data: any) => {
   try {

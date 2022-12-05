@@ -31,7 +31,7 @@ export function RightSide({ meeting }: any) {
           {meeting.time1}
         </Button>
         <Button onClick={() => setSelected(meeting.time2)}>
-          {moment(meeting.time2).format("HH:MM")}
+          {meeting.time2}
         </Button>
       </SimpleGrid>
       <Text align="center">Or Suggest your time:</Text>
