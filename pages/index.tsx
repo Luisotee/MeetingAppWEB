@@ -57,7 +57,7 @@ export default function Home() {
         }
 
         if (
-          meeting.limitData < dateNow &&
+          meeting.limitData == dateNow &&
           meeting.bestTime == null &&
           meeting.choosenTimes != null
         ) {
