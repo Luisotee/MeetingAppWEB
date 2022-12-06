@@ -50,14 +50,15 @@ export default function Home() {
             console.log(email);
             emailContent.email = email;
             emailContent.message =
-              "http://localhost:3000/meeting/" + meeting.id;
+              "You have been invited to a meeting! You can vote for your time here: https://meeting-app-web.vercel.app/meeting/" +
+              meeting.id;
             sendMail(emailContent);
             insertEmailSent({ meeting });
           });
         }
 
         if (
-          meeting.limitData == dateNow &&
+          meeting.limitData < dateNow &&
           meeting.bestTime == null &&
           meeting.choosenTimes != null
         ) {
@@ -86,10 +87,14 @@ export default function Home() {
 
           if (count1 > count2 && count1 > count3) {
             console.log("1");
-            definetiveTime = meeting.time1;
+            (definetiveTime =
+              "Your meeting has been settled! The best time for it would be: "),
+              meeting.time1;
           } else if (count2 > count1 && count2 > count3) {
             console.log("2");
-            definetiveTime = meeting.time2;
+            (definetiveTime =
+              "Your meeting has been settled! The best time for it would be: "),
+              meeting.time2;
           } else {
             console.log("3");
             definetiveTime =
