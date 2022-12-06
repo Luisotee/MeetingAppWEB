@@ -45,9 +45,10 @@ export default function Home() {
         if (meeting.emailAlreadySent == false) {
           let emails = [];
           emails = meeting.meetingParticipants.split(";");
+          console.log(email);
 
           emails.map((email: any) => {
-            //console.log(email);
+            console.log(email);
             emailContent.email = email;
             emailContent.message =
               "http://localhost:3000/meeting/" + meeting.id;
