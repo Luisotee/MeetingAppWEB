@@ -13,12 +13,9 @@ import { insertTime } from "../../dbHandler/insert-data.jsx";
 export function RightSide({ meeting }: any) {
   const [inputSelected, setInputSelected] = useState(new Date());
   const [selected, setSelected] = useState("");
-  //setSelected(moment(inputSelected).format("HH:mm"));
 
   function handleInput() {
-    //console.log(inputSelected);
     var a = moment(inputSelected).format("HH:mm");
-    //console.log(a);
 
     setSelected(a);
   }

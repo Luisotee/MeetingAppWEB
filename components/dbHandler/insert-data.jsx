@@ -21,7 +21,6 @@ export async function insertTime(props, { meeting }) {
 }
 
 export async function insertData(props, { meeting }) {
-  //console.log(meeting);
   const { error } = await supabase
     .from("meetings")
     .update({
@@ -34,7 +33,6 @@ export async function insertData(props, { meeting }) {
 }
 
 export async function insertEmailSent({ meeting }) {
-  //console.log(meeting);
   const { error } = await supabase
     .from("meetings")
     .update({

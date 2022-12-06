@@ -23,8 +23,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       .select("*")
       .eq("id", query.id);
 
-    //console.log("meeting: ", meeting);
-
     if (!meeting) {
       return {
         redirect: {
@@ -48,20 +46,3 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     };
   }
 };
-
-/*id: 10,
-created_at: '2022-11-28T23:19:07.443426+00:00',
-meetingName: 'Party ',
-meetingDescription: 'End of year party',
-meetingDuration: '1',
-meetingParticipants: 'All',
-dataISO: '2022-11-29',
-time1: '20:00:00',
-time2: '22:00:00',
-isRemovable: false,
-userId: '7b62e2aa-a46e-46a7-a208-0a2c36700be9',
-limitData: '2022-11-28',
-limitHour: '16:00:00',
-choosenTimes: null,
-bestTime: null,
-emailAlreadySent: false*/

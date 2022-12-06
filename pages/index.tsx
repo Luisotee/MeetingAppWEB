@@ -1,20 +1,12 @@
 import moment from "moment";
-import Head from "next/head";
-import Image from "next/image";
-import { Container, Title } from "@mantine/core";
 
-import { supabase } from "../supabase";
-import styles from "../styles/Home.module.css";
-import { MainCard } from "../components/main-card/main-card";
-import { resolve } from "node:path/win32";
-import { count } from "node:console";
+import { useRouter } from "next/router";
+import { removeMeeting } from "../components/dbHandler/delete-data";
+import { fetchMeetings } from "../components/dbHandler/fetch-data";
 import {
   insertData,
   insertEmailSent,
 } from "../components/dbHandler/insert-data.jsx";
-import { removeMeeting } from "../components/dbHandler/delete-data";
-import { useRouter } from "next/router";
-import { fetchMeetings } from "../components/dbHandler/fetch-data";
 
 export default function Home() {
   const date = new Date();
@@ -36,12 +28,8 @@ export default function Home() {
 
   async function handleSubmit() {
     const meetings = await fetchMeetings();
-    //console.log(meetings);
     if (meetings) {
       meetings.map((meeting: any) => {
-        //console.log(meeting);
-        //console.log("DATA hoj", dateNow);
-
         if (meeting.emailAlreadySent == false) {
           let emails = [];
           emails = meeting.meetingParticipants.split(";");
@@ -62,10 +50,8 @@ export default function Home() {
           meeting.bestTime == null &&
           meeting.choosenTimes != null
         ) {
-          //console.log("ENTROEUUUUUUUUU");
           let emails = [];
           emails = meeting.meetingParticipants.split(";");
-          //console.log(emails);
 
           let count1 = 0;
           let count2 = 0;
@@ -103,7 +89,6 @@ export default function Home() {
           console.log(definetiveTime);
           emailDone.message = definetiveTime;
           emails.map((email: any) => {
-            //console.log(email);
             emailDone.email = email;
             sendMail(emailDone);
           });
