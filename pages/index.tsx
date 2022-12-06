@@ -52,7 +52,7 @@ export default function Home() {
             emailContent.message =
               "http://localhost:3000/meeting/" + meeting.id;
             sendMail(emailContent);
-            insertEmailSent({ meeting });
+            //insertEmailSent({ meeting });
           });
         }
 
