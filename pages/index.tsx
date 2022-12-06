@@ -37,100 +37,86 @@ export default function Home() {
   async function handleSubmit() {
     const meetings = await fetchMeetings();
     //console.log(meetings);
-    meetings.map((meeting: any) => {
-      //console.log(meeting);
-      console.log("DATA hoj", dateNow);
+    if (meetings) {
+      meetings.map((meeting: any) => {
+        //console.log(meeting);
+        //console.log("DATA hoj", dateNow);
 
-      if (meeting.emailAlreadySent == false) {
-        let emails = [];
-        emails = meeting.meetingParticipants.split(";");
+        if (meeting.emailAlreadySent == false) {
+          let emails = [];
+          emails = meeting.meetingParticipants.split(";");
 
-        emails.map((email: any) => {
-          //console.log(email);
-          emailContent.email = email;
-          emailContent.message = "http://localhost:3000/meeting/" + meeting.id;
-          sendMail(emailContent);
-          insertEmailSent({ meeting });
-        });
-      }
-
-      if (
-        meeting.limitData < dateNow &&
-        meeting.bestTime == null &&
-        meeting.choosenTimes != null
-      ) {
-        //console.log("ENTROEUUUUUUUUU");
-        let emails = [];
-        emails = meeting.meetingParticipants.split(";");
-        //console.log(emails);
-
-        let count1 = 0;
-        let count2 = 0;
-        let count3 = 0;
-        let definetiveTime = "";
-
-        meeting.choosenTimes.map((time: any) => {
-          if (time == meeting.time1) {
-            count1++;
-          } else if (time == meeting.time2) {
-            count2++;
-          } else {
-            count3++;
-          }
-        });
-        console.log("count 1: ", count1);
-        console.log("count 2: ", count2);
-        console.log("count 3: ", count3);
-
-        if (count1 > count2 && count1 > count3) {
-          console.log("1");
-          definetiveTime = meeting.time1;
-        } else if (count2 > count1 && count2 > count3) {
-          console.log("2");
-          definetiveTime = meeting.time2;
-        } else {
-          console.log("3");
-          definetiveTime =
-            "Suggested time count higher, please redo your meeting.";
+          emails.map((email: any) => {
+            //console.log(email);
+            emailContent.email = email;
+            emailContent.message =
+              "http://localhost:3000/meeting/" + meeting.id;
+            sendMail(emailContent);
+            insertEmailSent({ meeting });
+          });
         }
-        console.log(definetiveTime);
-        emailDone.message = definetiveTime;
-        emails.map((email: any) => {
-          //console.log(email);
-          emailDone.email = email;
-          sendMail(emailDone);
-        });
-        insertData(definetiveTime, { meeting });
-      }
-      if (meeting.dataISO < dateNow) {
-        removeMeeting({ meeting });
-      }
-    });
+
+        if (
+          meeting.limitData < dateNow &&
+          meeting.bestTime == null &&
+          meeting.choosenTimes != null
+        ) {
+          //console.log("ENTROEUUUUUUUUU");
+          let emails = [];
+          emails = meeting.meetingParticipants.split(";");
+          //console.log(emails);
+
+          let count1 = 0;
+          let count2 = 0;
+          let count3 = 0;
+          let definetiveTime = "";
+
+          meeting.choosenTimes.map((time: any) => {
+            if (time == meeting.time1) {
+              count1++;
+            } else if (time == meeting.time2) {
+              count2++;
+            } else {
+              count3++;
+            }
+          });
+          console.log("count 1: ", count1);
+          console.log("count 2: ", count2);
+          console.log("count 3: ", count3);
+
+          if (count1 > count2 && count1 > count3) {
+            console.log("1");
+            definetiveTime = meeting.time1;
+          } else if (count2 > count1 && count2 > count3) {
+            console.log("2");
+            definetiveTime = meeting.time2;
+          } else {
+            console.log("3");
+            definetiveTime =
+              "Suggested time count higher, please redo your meeting.";
+          }
+          console.log(definetiveTime);
+          emailDone.message = definetiveTime;
+          emails.map((email: any) => {
+            //console.log(email);
+            emailDone.email = email;
+            sendMail(emailDone);
+          });
+          insertData(definetiveTime, { meeting });
+        }
+        if (meeting.dataISO < dateNow) {
+          removeMeeting({ meeting });
+        }
+      });
+    }
   }
 
   const router = useRouter();
 
-  /*const timer = setTimeout(() => {
-    console.log("aoi");
-    handleSubmit();
-    clearInterval(timer);
-  }, 1000);*/
-
   const interval = setInterval(handleSubmit, 10000);
-
-  //handleSubmit();
 
   return <div>Server</div>;
 }
-
-/*export const getServerSideProps = async () => {
-  const { data: meetings } = await supabase.from("meetings").select("*");
-  return {
-    props: {
-      meetings,
-    },
-  };
-};*/
 
 const sendMail = async (data: any) => {
   try {
