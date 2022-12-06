@@ -34,13 +34,13 @@ export default function Home() {
           let emails = [];
           emails = meeting.meetingParticipants.split(";");
 
-          emails.map(async (email: any) => {
+          emails.map((email: any) => {
             console.log(email);
             emailContent.email = email;
             emailContent.message =
               "You have been invited to a meeting! You can vote for your time here: https://meeting-app-web.vercel.app/meeting/" +
               meeting.id;
-            await sendMail(emailContent);
+            sendMail(emailContent);
             insertEmailSent({ meeting });
           });
         }
@@ -84,9 +84,9 @@ export default function Home() {
           }
           console.log(definetiveTime);
           emailDone.message = definetiveTime;
-          emails.map(async (email: any) => {
+          emails.map((email: any) => {
             emailDone.email = email;
-            await sendMail(emailDone);
+            sendMail(emailDone);
           });
           insertData(definetiveTime, { meeting });
         }
