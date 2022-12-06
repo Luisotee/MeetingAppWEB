@@ -7,12 +7,15 @@ import {
 } from "@mantine/dates";
 import dayjs from "dayjs";
 import moment from "moment";
+import { useRouter } from "next/router.js";
 import { useState } from "react";
 import { insertTime } from "../../dbHandler/insert-data.jsx";
 
 export function RightSide({ meeting }: any) {
   const [inputSelected, setInputSelected] = useState(new Date());
   const [selected, setSelected] = useState("");
+
+  const router = useRouter();
 
   function handleInput() {
     var a = moment(inputSelected).format("HH:mm");
@@ -42,7 +45,14 @@ export function RightSide({ meeting }: any) {
         <Button onClick={handleInput}>Set suggestion</Button>
       </SimpleGrid>
       <Text>Selected time: {selected}</Text>
-      <Button onClick={() => insertTime(selected, { meeting })}>Submit</Button>
+      <Button
+        onClick={() => {
+          insertTime(selected, { meeting });
+          router.push(`/thanks/thanks`);
+        }}
+      >
+        Submit
+      </Button>
     </>
   );
 }
