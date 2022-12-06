@@ -73,13 +73,13 @@ export default function Home() {
 
           if (count1 > count2 && count1 > count3) {
             console.log("1");
-            (definetiveTime =
-              "Your meeting has been settled! The best time for it would be: "),
+            definetiveTime =
+              "Your meeting has been settled! The best time for it would be: ",
               meeting.time1;
           } else if (count2 > count1 && count2 > count3) {
             console.log("2");
-            (definetiveTime =
-              "Your meeting has been settled! The best time for it would be: "),
+            definetiveTime =
+              "Your meeting has been settled! The best time for it would be: ",
               meeting.time2;
           } else {
             console.log("3");
